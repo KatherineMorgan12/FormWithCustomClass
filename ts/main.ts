@@ -13,7 +13,7 @@ class Movie{
 
 window.onload = function() {
     let addBtn = <HTMLElement>document.querySelector("input[type=button]");
-    addBtn.onclick = addMovie;
+    addBtn.onclick = addProduct;
 }
 
 function addProduct() {
@@ -40,6 +40,24 @@ function getProduct():Movie{
 
 function displayProduct(product:Movie):void{
     // DISPLAY MOVIE BELOW WEB FORM
+    let displayDiv = document.getElementById("display");
+
+    // Create <h2> with Movie.title
+    let productHeading = document.createElement("h2");
+    productHeading.innerText = product.title;
+    // Create <p> with Movie details
+    let productInfo = document.createElement("p");
+    let formatInfo = "";
+    if(product.isDigital){
+        formatInfo = " and it is digital.";
+    } else{
+        formatInfo = " and it is not digital.";
+    }
+    productInfo.innerText = `${product.title} has a rating of ${product.rating}, it costs $${product.price.toFixed(2)},${formatInfo}.`;
+    // Add <h2> to <div id="display">
+    displayDiv.appendChild(productHeading);
+    // Add <p> of Movie info
+    displayDiv.appendChild(productInfo); 
 }
 
 // ADD VALIDATION CODE

@@ -5,7 +5,7 @@ var Movie = (function () {
 }());
 window.onload = function () {
     var addBtn = document.querySelector("input[type=button]");
-    addBtn.onclick = addMovie;
+    addBtn.onclick = addProduct;
 };
 function addProduct() {
     if (isAllDataValid()) {
@@ -22,6 +22,20 @@ function getProduct() {
     return movie1;
 }
 function displayProduct(product) {
+    var displayDiv = document.getElementById("display");
+    var productHeading = document.createElement("h2");
+    productHeading.innerText = product.title;
+    var productInfo = document.createElement("p");
+    var formatInfo = "";
+    if (product.isDigital) {
+        formatInfo = " and it is digital.";
+    }
+    else {
+        formatInfo = " and it is not digital.";
+    }
+    productInfo.innerText = product.title + " has a rating of " + product.rating + ", it costs $" + product.price.toFixed(2) + "," + formatInfo + ".";
+    displayDiv.appendChild(productHeading);
+    displayDiv.appendChild(productInfo);
 }
 function isAllDataValid() {
     return true;
