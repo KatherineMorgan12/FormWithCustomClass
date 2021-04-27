@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "removeComments": true,
-        "outDir": "js",             
+        "outDir": "js",         // Folder the JS will be output to        
         "target": "ES5",
         "watch": true
     }
