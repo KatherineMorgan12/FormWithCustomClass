@@ -3,6 +3,7 @@ class Movie{
     price:number;
     rating:string;
     isDigital:boolean;
+    releaseDate:string;
 }
 
 // test code
@@ -20,7 +21,12 @@ function addProduct() {
     if (isAllDataValid()){
         let movie = getProduct();
         displayProduct(movie);
+        clearForm();
     }
+}
+
+function clearForm(){
+    
 }
 
 /**
@@ -34,6 +40,7 @@ function getProduct():Movie{
     movie1.price = parseFloat((<HTMLInputElement>document.getElementById("price")).value);
     movie1.rating = (<HTMLInputElement>document.getElementById("rating")).value;
     movie1.isDigital = (<HTMLInputElement>document.getElementById("digital")).checked;
+    movie1.releaseDate = (<HTMLInputElement>document.getElementById("releaseDate")).value;
     // RETURN MOVIE
     return movie1;
 }
@@ -53,7 +60,7 @@ function displayProduct(product:Movie):void{
     } else{
         formatInfo = " and it is not digital.";
     }
-    productInfo.innerText = `${product.title} has a rating of ${product.rating}, it costs $${product.price.toFixed(2)},${formatInfo}.`;
+    productInfo.innerText = `${product.title}, which was released ${product.releaseDate} has a rating of ${product.rating}, it costs $${product.price.toFixed(2)},${formatInfo}.`;
     // Add <h2> to <div id="display">
     displayDiv.appendChild(productHeading);
     // Add <p> of Movie info
@@ -62,6 +69,34 @@ function displayProduct(product:Movie):void{
 
 // ADD VALIDATION CODE
 function isAllDataValid() {
+    let title = (<HTMLInputElement>document.getElementById("title")).value;
+    let price = parseFloat((<HTMLInputElement>document.getElementById("price")).value);
+    let rating = (<HTMLInputElement>document.getElementById("rating")).value;
+    let releaseDate = (<HTMLInputElement>document.getElementById("releaseDate")).value;
+
+    let displayError = document.getElementById("validation-summary");
+    // titleValid
+    if (title.trim() == ""){
+        displayError.innerText = "Please enter a name of a movie.";
+        return false;
+    }
+    
+    // priceValid
+    if ((isNaN(price)) || (price < 0)){
+        displayError.innerText = "Please enter a positive price.";
+        return false;
+    }
+
+    // ratingValid
+    if (rating == "Select"){
+        displayError.innerText = "Please select an actual rating from the drop down menu.";
+        return false;
+    }
+    // dateValid
+    if (releaseDate == ""){
+        displayError.innerText = "Please choose a date on the calendar."
+        return false;
+    }
     return true;
 }
 
