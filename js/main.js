@@ -11,10 +11,7 @@ function addProduct() {
     if (isAllDataValid()) {
         var movie = getProduct();
         displayProduct(movie);
-        clearForm();
     }
-}
-function clearForm() {
 }
 function getProduct() {
     var movie1 = new Movie();
@@ -32,12 +29,12 @@ function displayProduct(product) {
     var productInfo = document.createElement("p");
     var formatInfo = "";
     if (product.isDigital) {
-        formatInfo = " and it is digital.";
+        formatInfo = "it is digital";
     }
     else {
-        formatInfo = " and it is not digital.";
+        formatInfo = "it is not digital";
     }
-    productInfo.innerText = product.title + ", which was released " + product.releaseDate + " has a rating of " + product.rating + ", it costs $" + product.price.toFixed(2) + "," + formatInfo + ".";
+    productInfo.innerText = product.title + ", which was released " + product.releaseDate + " has a rating of " + product.rating + ", it costs $" + product.price.toFixed(2) + ", and " + formatInfo + ".";
     displayDiv.appendChild(productHeading);
     displayDiv.appendChild(productInfo);
 }
